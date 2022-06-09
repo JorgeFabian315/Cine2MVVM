@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Cine2MVVM.ViewModels"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="Cine2MVVM.Views.MostrarDetallesView">
+    <Grid RowDefinitions=".3*,.1*,.2*,.6*"
+          BackgroundColor="White">
+        <Frame Padding="0"
+               HasShadow="False"
+               Grid.RowSpan="2">
+            <Grid>
+                <Image Aspect="AspectFill"
+                       Source="{Binding Pelicula.Portada}"></Image>
+                <Frame BackgroundColor="Black"
+                       Opacity=".25"></Frame>
+                <Grid VerticalOptions="Start"
+                      x:Name="eli"
+                      HorizontalOptions="End">
+                    <Image Source="eliminar.png"
+                           WidthRequest="50"
+                           Margin="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+            </Grid>
+        </Frame>
+        <Frame Grid.Row="2"
+               Grid.RowSpan="2"
+               Margin="10,-7,10,0">
+            <Frame.Background>
+                <LinearGradientBrush StartPoint="0,1"
+                                     EndPoint="1,1">
+                    <GradientStop Color="#1892A9"
+                                  Offset="0.3"></GradientStop>
+                    <GradientStop Color="#1788A3"
+                                  Offset="0.4"></GradientStop>
+                    <GradientStop Color="#174379"
+                                  Offset="0.5"></GradientStop>
+                    <GradientStop Color="#17195F"
+                                  Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </Frame.Background>
+        </Frame>
+        <Image Source="{Binding Pelicula.Portada}"
+               Grid.Row="1"
+               Grid.RowSpan="2"
+               Aspect="AspectFit"
+               HorizontalOptions="Start"
+               Margin="20,0,0,0"></Image>
+        <StackLayout Spacing="10"
+                     HorizontalOptions="Center"
+                     Grid.Row="2">
+            <Label Text="{Binding Pelicula.Titulo}"
+                   Margin="70,10,0,0"
+                   TextColor="White"
+                   FontSize="Title"></Label>
+            <StackLayout Orientation="Horizontal">
+                <Image Source="estrella.png"
+                       WidthRequest="30" />
+                <Label Text="{Binding Pelicula.Puntuacion}" />
+            </StackLayout>
+        </StackLayout>
+        <StackLayout Grid.Row="3">
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Start"
+                         VerticalOptions="Start">
+                <Label Text="Director: "
+                       Margin="20,0,0,0"
+                       TextColor="White"
+                       FontSize="Medium" />
+                <Label Text="{Binding Pelicula.Director}"
+                       Margin="0,0,0,0"
+                       TextColor="White"
+                       FontSize="Medium" />
+            </StackLayout>
+            <Label Text="{Binding Pelicula.Descripcion}"
+                   TextColor="White" />
+        </StackLayout>
+        <Grid Grid.Row="3"
+              TranslationY="150"
+              x:Name="MenuEliminar"
+              Margin="10,0"
+              VerticalOptions="End">
+            <BoxView CornerRadius="10,10,0,0"
+                     HeightRequest="130">
+                <BoxView.Background>
+                    <LinearGradientBrush StartPoint="0,1">
+                        <GradientStop Color="#ff5131"
+                                      Offset="0.2"></GradientStop>
+                        <GradientStop Color="#d50000"
+                                      Offset="0.5"></GradientStop>
+                        <GradientStop Color="#9b0000"
+                                      Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
+            <StackLayout Orientation="Horizontal"
+                         Spacing="-15"
+                         HorizontalOptions="Center"
+                         Margin="0,10,0,0">
+                <Label Text="Desea eliminar:"
+                       TextColor="White"
+                       VerticalOptions="Start"
+                       FontSize="Large"
+                       Margin="30,0,0,0"></Label>
+                <Label Text="{Binding Pelicula.Titulo}"
+                       TextColor="White"
+                       VerticalOptions="Start"
+                       FontSize="Large"
+                       Margin="30,0,0,0"></Label>
+            </StackLayout>
+            <StackLayout VerticalOptions="Center"
+                         HorizontalOptions="Center"
+                         Orientation="Horizontal">
+                <StackLayout.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="CornerRadius"
+                                Value="10" />
+                        <Setter Property="Margin"
+                                Value="10,40,0,5" />
+                    </Style>
+                </StackLayout.Resources>
+                <Button Text="Si"
+                        Command="{Binding EliminarCommand}"
+                        CommandParameter="{Binding Pelicula}"></Button>
+                <Button Text="No"
+                        x:Name="btnNo"
+                        Clicked="btnNo_Clicked"></Button>
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

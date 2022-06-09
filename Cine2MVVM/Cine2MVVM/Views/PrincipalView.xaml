@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cine2MVVM.Views.PrincipalView"
+             xmlns:cardview="clr-namespace:PanCardView;assembly=PanCardView"
+             xmlns:sharpnado="clr-namespace:Sharpnado.MaterialFrame;assembly=Sharpnado.MaterialFrame"
+             xmlns:viewmodels="clr-namespace:Cine2MVVM.ViewModels"
+             BackgroundColor="#141A32"
+             NavigationPage.HasNavigationBar="False"
+             Title="Peliculas">
+    <ContentPage.BindingContext>
+        <viewmodels:CineVM x:Name="cinevm"></viewmodels:CineVM>
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="70,70,*">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0.1">
+                <GradientStop Color="#084264"
+                              Offset="0.3"></GradientStop>
+                <GradientStop Color="#055372"
+                              Offset="0.4"></GradientStop>
+                <GradientStop Color="#141A32"
+                              Offset="1"></GradientStop>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid ColumnDefinitions=".18*,.5*,.3*"
+              Margin="0,20,0,0">
+            <Image Source="menu.png"
+                   VerticalOptions="Center"
+                   WidthRequest="40"
+                   HorizontalOptions="StartAndExpand"
+                   Margin="15,0,0,0"></Image>
+            <StackLayout Grid.Column="1"
+                         Spacing="-1"
+                         VerticalOptions="Start"
+                         HorizontalOptions="Start">
+                <Label Text="Hola"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       FontSize="Medium"></Label>
+                <Label Text="Disfruta de nuestra cartelera"
+                       TextColor="GhostWhite"
+                       FontSize="Small"></Label>
+            </StackLayout>
+            <Image Source="usuario.png"
+                   Grid.Column="2"
+                   WidthRequest="40"
+                   VerticalOptions="Start"
+                   HorizontalOptions="End"
+                   Margin="0,0,15,0"></Image>
+        </Grid>
+        <!--BARRA DE BUSQUEDA-->
+        <Grid Margin="15,10,15,10"
+              Grid.Row="1">
+            <Frame BackgroundColor="Transparent"
+                   BorderColor="White"
+                   CornerRadius="20" />
+            <StackLayout Orientation="Horizontal"
+                         Margin="10,0,0,0">
+                <Image Source="lupa.png"
+                       WidthRequest="25"></Image>
+                <Label Text="Buscar"
+                       Margin="10,0,0,0"
+                       TextColor="GhostWhite"
+                       VerticalOptions="Center"
+                       FontAttributes="Italic"
+                       FontSize="Medium"></Label>
+                <Image Source="microfono.png"
+                       WidthRequest="20"
+                       HorizontalOptions="EndAndExpand"
+                       Margin="0,0,15,0"></Image>
+            </StackLayout>
+        </Grid>
+        <!--AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIII-->
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding Cartelera}"
+                        Margin="20,0">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout VerticalItemSpacing="20"
+                                 Orientation="Vertical"
+                                 Span="1"></GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,10"
+                          ColumnDefinitions=".40*,.60*,.05*">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference cinevm}, Path=MostrarDetallesCommand}"
+                                                  CommandParameter="{Binding .}"></TapGestureRecognizer>
+                          
+                        </Grid.GestureRecognizers>
+                        <Frame CornerRadius="10"
+                               HasShadow="False"
+                               Margin="0,40,0,0"
+                               Grid.ColumnSpan="2">
+                            <Frame.Background>
+                                <LinearGradientBrush StartPoint="0,1"
+                                                     EndPoint="1,1">
+                                    <GradientStop Color="#1892A9"
+                                                  Offset="0.3"></GradientStop>
+                                    <GradientStop Color="#1788A3"
+                                                  Offset="0.4"></GradientStop>
+                                    <GradientStop Color="#174379"
+                                                  Offset="0.5"></GradientStop>
+                                    <GradientStop Color="#17195F"
+                                                  Offset="1"></GradientStop>
+                                </LinearGradientBrush>
+                            </Frame.Background>
+                        </Frame>
+                        <Frame Padding="0"
+                               HasShadow="False"
+                               CornerRadius="10"
+                               Margin="15,10,10,10">
+                            <Image Source="{Binding Portada}"
+                                   WidthRequest="100"
+                                   Aspect="AspectFill"></Image>
+                        </Frame>
+                        <StackLayout Grid.Column="1"
+                                     Margin="0,60,0,0">
+                            <Label Text="{Binding Titulo}"
+                                   FontSize="Large"
+                                   TextColor="White" />
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Director: "
+                                       FontSize="Small"
+                                       TextColor="White" />
+                                <Label Text="{Binding Director}"
+                                       FontSize="Small"
+                                       TextColor="White" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="estrella.png"
+                                       WidthRequest="20"
+                                       VerticalOptions="Center"></Image>
+                                <Label Text="{Binding Puntuacion}"
+                                       FontSize="Large"
+                                       Margin="5,0,0,0"
+                                       VerticalOptions="Center"
+                                       TextColor="#FFC107"></Label>
+                            </StackLayout>
+                            <Label Text="{Binding Año}"
+                                   TextColor="White"></Label>
+                        </StackLayout>
+                        <Button Grid.Column="1"
+                                VerticalOptions="End"
+                                Margin="100,0,0,10"
+                                CornerRadius="30"
+                                Text="Editar"
+                                TextTransform="None"
+                                TextColor="White"
+                                Command="{Binding Source={x:Reference cinevm}, Path=EditarCommand}"
+                                CommandParameter="{Binding .}"
+                                Grid.ColumnSpan="2">
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="0,1">
+                                    <GradientStop Color="#1892A9"
+                                                  Offset="0.4"></GradientStop>
+                                    <GradientStop Color="#174379"
+                                                  Offset="0.7"></GradientStop>
+                                    <GradientStop Color="#17195F"
+                                                  Offset="1"></GradientStop>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Image Grid.Row="2"
+               Source="agregar.png"
+               WidthRequest="60"
+               VerticalOptions="End"
+               Margin="0,0,30,30"
+               HorizontalOptions="End">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CambiarVistaCommand}"
+                                      CommandParameter="Agregar"></TapGestureRecognizer>
+            </Image.GestureRecognizers>
+        </Image>
+     
+    </Grid>
+</ContentPage>
