@@ -1,4 +1,5 @@
 ﻿using Cine2MVVM.Views;
+using Plugin.SharedTransitions;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

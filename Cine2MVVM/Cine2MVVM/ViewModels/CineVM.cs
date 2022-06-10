@@ -1,6 +1,7 @@
 ﻿using Cine2MVVM.Models;
 using Cine2MVVM.Views;
 using Newtonsoft.Json;
+using Plugin.SharedTransitions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -108,10 +109,10 @@ namespace Cine2MVVM.ViewModels
 
             }
         }
-        private void MostrarDetalles(Pelicula a)
+        private void MostrarDetalles(Pelicula pelicula)
         {
             detallesView = new MostrarDetallesView() { BindingContext = this};
-            this.Pelicula = a;
+            this.Pelicula = pelicula;
             Actualizar();
             Application.Current.MainPage.Navigation.PushAsync(detallesView);
         }

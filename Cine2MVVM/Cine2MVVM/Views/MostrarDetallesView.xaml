@@ -21,7 +21,7 @@
                 <Image Aspect="AspectFill"
                        Source="{Binding Pelicula.Portada}"></Image>
                 <Frame BackgroundColor="Black"
-                       Opacity=".25"></Frame>
+                       Opacity=".3"></Frame>
                 <!--#REGION IMAGEN REGRESO-->
                 <Image Source="regreso.png"
                        HorizontalOptions="Start"
@@ -67,48 +67,48 @@
             </Frame.Background>
             <!--#ENDREGION FONDO DEL FRAMEK-->
         </Frame>
-        
-            <Image Source="{Binding Pelicula.Portada}"
-                   Grid.Row="1"
-                   Grid.RowSpan="2"
-                   Aspect="AspectFit"
-                   HorizontalOptions="Start"
-                   Margin="20,0,0,0"></Image>
-        
+        <Image Source="{Binding Pelicula.Portada}"
+               Grid.Row="1"
+               Grid.RowSpan="2"
+               Aspect="AspectFit"
+               HorizontalOptions="Start"
+               Margin="20,0,0,0"></Image>
         <StackLayout Grid.Column="1"
                      Grid.Row="2"
                      Margin="5,5,10,0">
-            
             <Label Text="{Binding Pelicula.Titulo}"
                    FontSize="Large"
                    FontAttributes="Bold" />
             <StackLayout Orientation="Horizontal">
                 <Image Source="estrella.png"
                        WidthRequest="20" />
-                <Label Text="{Binding Pelicula.Puntuacion}"/>
+                <Label Text="{Binding Pelicula.Puntuacion}" />
             </StackLayout>
             <Label Text="{Binding Pelicula.Año}" />
         </StackLayout>
-        <StackLayout Grid.Row="3" Margin="20,0,0,0"
+        <StackLayout Grid.Row="3"
+                     Margin="20,0,0,0"
                      Orientation="Horizontal">
-            <Label Text="Director:" FontSize="Medium"/>
-            <Label Text="{Binding Pelicula.Director}" FontSize="Medium" />
+            <Label Text="Director:"
+                   FontSize="Medium" />
+            <Label Text="{Binding Pelicula.Director}"
+                   FontSize="Medium" />
         </StackLayout>
         <StackLayout Grid.ColumnSpan="2"
                      VerticalOptions="Center"
                      Margin="20,0,0,0"
                      Grid.Row="3">
             <Label Text="{Binding Pelicula.Descripcion}"
-                   FontSize="Large"/>
+                   FontSize="Large" />
         </StackLayout>
         <!--#REGION DE CONFIRMAR ELIMINAR-->
         <Grid Grid.Row="4"
               TranslationY="150"
               x:Name="MenuEliminar"
-              Margin="10,0"
+              Margin="0,0"
               Grid.ColumnSpan="2"
               VerticalOptions="End">
-            <BoxView CornerRadius="10,10,0,0"
+            <BoxView CornerRadius="30,30,0,0"
                      HeightRequest="150">
                 <BoxView.Background>
                     <LinearGradientBrush StartPoint="0,1">
@@ -147,7 +147,7 @@
                         <Setter Property="CornerRadius"
                                 Value="10" />
                         <Setter Property="Margin"
-                                Value="10,40,0,5" />
+                                Value="20,40,20,5" />
                     </Style>
                 </StackLayout.Resources>
                 <Button Text="Si"
@@ -160,9 +160,10 @@
                         <LinearGradientBrush StartPoint="1,0">
                             <GradientStop Color="#6abf69"
                                           Offset="0" />
-                            <GradientStop Color="#388e3c" Offset="0.45"/>
+                            <GradientStop Color="#388e3c"
+                                          Offset="0.45" />
                             <GradientStop Color="#00600f"
-                                          Offset="1"/>
+                                          Offset="1" />
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
