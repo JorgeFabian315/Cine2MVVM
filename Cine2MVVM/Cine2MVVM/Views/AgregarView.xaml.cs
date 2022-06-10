@@ -16,5 +16,10 @@ namespace Cine2MVVM.Views
         {
             InitializeComponent();
         }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PopToRootAsync();
+        }
     }
 }

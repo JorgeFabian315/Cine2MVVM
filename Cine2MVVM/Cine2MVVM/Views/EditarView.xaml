@@ -1,69 +1,123 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Cine2MVVM.Views.EditarView">
-    <StackLayout>
-        <StackLayout Margin="10">
-            <StackLayout.Resources>
-                <Style TargetType="Label">
-                    <Setter Property="FontSize"
-                            Value="Medium" />
-                    <Setter Property="TextColor"
-                            Value="Black" />
-                    <Setter Property="Margin"
-                            Value="20,0,0,0" />
-                </Style>
-                <Style TargetType="Entry">
-                    <Setter Property="FontSize"
-                            Value="Medium" />
-                </Style>
-            </StackLayout.Resources>
-            <Label Text="Agregar pelicula"
-                   FontSize="Title"
-                   HorizontalOptions="CenterAndExpand"
-                   Margin="0,10,0,10"></Label>
-            <Label Text="Titulo"></Label>
-            <Entry Text="{Binding Pelicula.Titulo}"></Entry>
-            <Label Text="Portada"></Label>
-            <Entry Text="{Binding Pelicula.Portada}"></Entry>
-            <Label Text="Director"></Label>
-            <Entry Text="{Binding Pelicula.Director}"></Entry>
-            <Label Text="Descripcion"></Label>
-            <Entry Text="{Binding Pelicula.Descripcion}"></Entry>
-            <StackLayout Orientation="Horizontal"
-                         Margin="20,10">
-                <StackLayout HorizontalOptions="StartAndExpand">
-                    <Label Text="Año"
-                           HorizontalOptions="Center"></Label>
-                    <Entry Text="{Binding Pelicula.Año}"></Entry>
-                </StackLayout>
-                <StackLayout>
-                    <Label Text="Puntuación"></Label>
-                    <Entry Keyboard="Numeric"
+             x:Class="Cine2MVVM.Views.EditarView"
+             NavigationPage.HasNavigationBar="False">
+    <Grid RowDefinitions="200,*,15">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0.1">
+                <GradientStop Color="#1892A9"
+                              Offset="0.5"></GradientStop>
+                <GradientStop Color="#055372"
+                              Offset="0.7"></GradientStop>
+                <GradientStop Color="#141A32"
+                              Offset="1"></GradientStop>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid  Grid.RowSpan="2"
+               VerticalOptions="Start">
+            <Image Source="{Binding Source={x:Reference imagen}, Path=Text}"
+                   Aspect="AspectFill"
+                   HeightRequest="350"></Image>
+            <Frame BackgroundColor="Black"
+                   Opacity=".2"></Frame>
+        </Grid>
+        <Image Source="regreso.png"
+               VerticalOptions="Start"
+               WidthRequest="40"
+               HorizontalOptions="Start"
+               Margin="15,15,10,10">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+            </Image.GestureRecognizers>
+        </Image>
+        <Frame Grid.Row="1"
+               Padding="0"
+               CornerRadius="10"
+               Margin="10,0">
+            <StackLayout Grid.Row="1"
+                         BackgroundColor="#055372">
+                <StackLayout Margin="10">
+                    <StackLayout.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="FontSize"
+                                    Value="Medium" />
+                            <Setter Property="TextColor"
+                                    Value="White" />
+                            <Setter Property="Margin"
+                                    Value="3,0,0,0" />
+                        </Style>
+                        <Style TargetType="Entry">
+                            <Setter Property="FontSize"
+                                    Value="Medium" />
+                            <Setter Property="TextColor"
+                                    Value="White" />
+                            <Setter Property="PlaceholderColor"
+                                    Value="GhostWhite" />
+                        </Style>
+                    </StackLayout.Resources>
+                    <Label Text="Agregar pelicula"
+                           FontSize="Medium"
+                           TextTransform="Uppercase"
+                           HorizontalOptions="CenterAndExpand"
+                           Margin="0,0,0,0"></Label>
+                    <Entry Text="{Binding Pelicula.Titulo}"
+                           Placeholder="Titulo"
+                           TextColor="White"></Entry>
+                    <Entry Text="{Binding Pelicula.Portada}"
+                           x:Name="imagen"
+                           TextColor="White"
+                           Placeholder="Portada"></Entry>
+                    <Entry Text="{Binding Pelicula.Director}"
+                           Placeholder="Director"></Entry>
+                    <Entry Text="{Binding Pelicula.Descripcion}"
+                           Placeholder="Descripción"></Entry>
+                    <StackLayout HorizontalOptions="StartAndExpand"
+                                 Orientation="Horizontal">
+                        <Label Text="Año:"
+                               VerticalOptions="Center"></Label>
+                        <Entry Text="{Binding Pelicula.Año}"
+                               Keyboard="Numeric"
+                               MaxLength="4"
+                               WidthRequest="100"
+                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="StartAndExpand"></Entry>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Puntuación:"
+                               VerticalOptions="Center"></Label>
+                        <Entry Keyboard="Numeric"
+                               WidthRequest="50"
+                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="Center"
+                               Text="{Binding Pelicula.Puntuacion}"
+                               MaxLength="1"></Entry>
+                    </StackLayout>
+                    <Label Text="{Binding Error}"
                            HorizontalOptions="Center"
-                           Text="{Binding Pelicula.Puntuacion}"
-                           MaxLength="1"></Entry>
+                           FontSize="Small"
+                           TextColor="Gold" />
+                    <Button CornerRadius="20"
+                            HorizontalOptions="Center"
+                            Text=" Guardar "
+                            Command="{Binding GuardarCommand}"
+                            Margin="0,10,0,0"
+                            FontSize="Medium"
+                            TextTransform="None"
+                            TextColor="White">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,1">
+                                <GradientStop Color="#1892A9"
+                                              Offset="0.4"></GradientStop>
+                                <GradientStop Color="#174379"
+                                              Offset="0.7"></GradientStop>
+                                <GradientStop Color="#17195F"
+                                              Offset="1"></GradientStop>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                 </StackLayout>
             </StackLayout>
-            <Button CornerRadius="20"
-                    HorizontalOptions="Center"
-                    Text=" Guardar "
-                    Command="{Binding GuardarCommand}"
-                    Margin="0,20,0,0"
-                    FontSize="Medium"
-                    TextTransform="None"
-                    TextColor="White">
-                <Button.Background>
-                    <LinearGradientBrush StartPoint="0,1">
-                        <GradientStop Color="#1892A9"
-                                      Offset="0.4"></GradientStop>
-                        <GradientStop Color="#174379"
-                                      Offset="0.7"></GradientStop>
-                        <GradientStop Color="#17195F"
-                                      Offset="1"></GradientStop>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-        </StackLayout>
-    </StackLayout>
+        </Frame>
+    </Grid>
 </ContentPage>

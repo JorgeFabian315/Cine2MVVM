@@ -4,32 +4,54 @@
              xmlns:viewmodels="clr-namespace:Cine2MVVM.ViewModels"
              NavigationPage.HasNavigationBar="False"
              x:Class="Cine2MVVM.Views.MostrarDetallesView">
-    <Grid RowDefinitions=".3*,.1*,.2*,.6*"
+    <Grid RowDefinitions=".3*,.1*,.2*,.2*,.4*"
+          ColumnDefinitions=".4*,.60*"
           BackgroundColor="White">
+        <Grid.Resources>
+            <Style TargetType="Label">
+                <Setter Property="TextColor"
+                        Value="White" />
+            </Style>
+        </Grid.Resources>
         <Frame Padding="0"
                HasShadow="False"
+               Grid.ColumnSpan="2"
                Grid.RowSpan="2">
-            <Grid>
+            <Grid Grid.ColumnSpan="2">
                 <Image Aspect="AspectFill"
                        Source="{Binding Pelicula.Portada}"></Image>
                 <Frame BackgroundColor="Black"
                        Opacity=".25"></Frame>
-                <Grid VerticalOptions="Start"
-                      x:Name="eli"
-                      HorizontalOptions="End">
-                    <Image Source="eliminar.png"
-                           WidthRequest="50"
-                           Margin="20">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
-                        </Image.GestureRecognizers>
-                    </Image>
-                </Grid>
+                <!--#REGION IMAGEN REGRESO-->
+                <Image Source="regreso.png"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start"
+                       Margin="20,10,0,0"
+                       WidthRequest="45">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="regresar"
+                                              Tapped="regresar_Tapped"></TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <!--#ENDREGION IMAGEN REGRESO-->
+                <!--#REGION IMAGEN ELIMINAR-->
+                <Image Source="eliminar.png"
+                       WidthRequest="45"
+                       Margin="0,10,10,0"
+                       VerticalOptions="Start"
+                       HorizontalOptions="EndAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <!--#ENDREGION IMAGEN ELIMINAR-->
             </Grid>
         </Frame>
         <Frame Grid.Row="2"
-               Grid.RowSpan="2"
-               Margin="10,-7,10,0">
+               Grid.RowSpan="3"
+               Grid.ColumnSpan="2"
+               Margin="0,-7,0,0">
+            <!--#REGION FONDO DEL FRAMEK-->
             <Frame.Background>
                 <LinearGradientBrush StartPoint="0,1"
                                      EndPoint="1,1">
@@ -43,49 +65,51 @@
                                   Offset="1"></GradientStop>
                 </LinearGradientBrush>
             </Frame.Background>
+            <!--#ENDREGION FONDO DEL FRAMEK-->
         </Frame>
-        <Image Source="{Binding Pelicula.Portada}"
-               Grid.Row="1"
-               Grid.RowSpan="2"
-               Aspect="AspectFit"
-               HorizontalOptions="Start"
-               Margin="20,0,0,0"></Image>
-        <StackLayout Spacing="10"
-                     HorizontalOptions="Center"
-                     Grid.Row="2">
+        
+            <Image Source="{Binding Pelicula.Portada}"
+                   Grid.Row="1"
+                   Grid.RowSpan="2"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Start"
+                   Margin="20,0,0,0"></Image>
+        
+        <StackLayout Grid.Column="1"
+                     Grid.Row="2"
+                     Margin="5,5,10,0">
+            
             <Label Text="{Binding Pelicula.Titulo}"
-                   Margin="70,10,0,0"
-                   TextColor="White"
-                   FontSize="Title"></Label>
+                   FontSize="Large"
+                   FontAttributes="Bold" />
             <StackLayout Orientation="Horizontal">
                 <Image Source="estrella.png"
-                       WidthRequest="30" />
-                <Label Text="{Binding Pelicula.Puntuacion}" />
+                       WidthRequest="20" />
+                <Label Text="{Binding Pelicula.Puntuacion}"/>
             </StackLayout>
+            <Label Text="{Binding Pelicula.Año}" />
         </StackLayout>
-        <StackLayout Grid.Row="3">
-            <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="Start"
-                         VerticalOptions="Start">
-                <Label Text="Director: "
-                       Margin="20,0,0,0"
-                       TextColor="White"
-                       FontSize="Medium" />
-                <Label Text="{Binding Pelicula.Director}"
-                       Margin="0,0,0,0"
-                       TextColor="White"
-                       FontSize="Medium" />
-            </StackLayout>
+        <StackLayout Grid.Row="3" Margin="20,0,0,0"
+                     Orientation="Horizontal">
+            <Label Text="Director:" FontSize="Medium"/>
+            <Label Text="{Binding Pelicula.Director}" FontSize="Medium" />
+        </StackLayout>
+        <StackLayout Grid.ColumnSpan="2"
+                     VerticalOptions="Center"
+                     Margin="20,0,0,0"
+                     Grid.Row="3">
             <Label Text="{Binding Pelicula.Descripcion}"
-                   TextColor="White" />
+                   FontSize="Large"/>
         </StackLayout>
-        <Grid Grid.Row="3"
+        <!--#REGION DE CONFIRMAR ELIMINAR-->
+        <Grid Grid.Row="4"
               TranslationY="150"
               x:Name="MenuEliminar"
               Margin="10,0"
+              Grid.ColumnSpan="2"
               VerticalOptions="End">
             <BoxView CornerRadius="10,10,0,0"
-                     HeightRequest="130">
+                     HeightRequest="150">
                 <BoxView.Background>
                     <LinearGradientBrush StartPoint="0,1">
                         <GradientStop Color="#ff5131"
@@ -97,24 +121,27 @@
                     </LinearGradientBrush>
                 </BoxView.Background>
             </BoxView>
-            <StackLayout Orientation="Horizontal"
-                         Spacing="-15"
+            <StackLayout Orientation="Vertical"
+                         Spacing="4"
                          HorizontalOptions="Center"
-                         Margin="0,10,0,0">
+                         Margin="0,15,0,0">
                 <Label Text="Desea eliminar:"
                        TextColor="White"
+                       HorizontalOptions="Start"
                        VerticalOptions="Start"
-                       FontSize="Large"
-                       Margin="30,0,0,0"></Label>
+                       FontSize="Medium"
+                       Margin="0,0,0,0"></Label>
                 <Label Text="{Binding Pelicula.Titulo}"
                        TextColor="White"
+                       FontAttributes="Bold"
                        VerticalOptions="Start"
-                       FontSize="Large"
-                       Margin="30,0,0,0"></Label>
+                       FontSize="Medium"
+                       Margin="0,0,0,0"></Label>
             </StackLayout>
             <StackLayout VerticalOptions="Center"
                          HorizontalOptions="Center"
-                         Orientation="Horizontal">
+                         Orientation="Horizontal"
+                         Margin="0,30,0,0">
                 <StackLayout.Resources>
                     <Style TargetType="Button">
                         <Setter Property="CornerRadius"
@@ -124,12 +151,30 @@
                     </Style>
                 </StackLayout.Resources>
                 <Button Text="Si"
+                        BorderColor="White"
+                        BorderWidth="1"
+                        TextColor="White"
                         Command="{Binding EliminarCommand}"
-                        CommandParameter="{Binding Pelicula}"></Button>
+                        CommandParameter="{Binding Pelicula}">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="1,0">
+                            <GradientStop Color="#6abf69"
+                                          Offset="0" />
+                            <GradientStop Color="#388e3c" Offset="0.45"/>
+                            <GradientStop Color="#00600f"
+                                          Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
                 <Button Text="No"
+                        BackgroundColor="Red"
                         x:Name="btnNo"
+                        BorderWidth="1"
+                        TextColor="White"
+                        BorderColor="White"
                         Clicked="btnNo_Clicked"></Button>
             </StackLayout>
         </Grid>
+        <!--#ENDREGION DE CONFIRMAR ELIMINAR-->
     </Grid>
 </ContentPage>

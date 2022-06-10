@@ -41,6 +41,7 @@ namespace Cine2MVVM.ViewModels
         int indiceoriginal;
         private void Editar(Pelicula original)
         {
+            Error = "";
             indiceoriginal = Cartelera.IndexOf(original);
             Pelicula = new Pelicula()
             {
@@ -60,10 +61,39 @@ namespace Cine2MVVM.ViewModels
 
         private void Guardar()
         {
-            Cartelera[indiceoriginal] = Pelicula;
-            Serializar();
-            Application.Current.MainPage.Navigation.PopToRootAsync();
-       
+            Error = "";
+            if (string.IsNullOrWhiteSpace(Pelicula.Titulo))
+            {
+                Error = "El titulo no puede estar vacío";
+            }
+            if (string.IsNullOrWhiteSpace(Pelicula.Descripcion))
+            {
+                Error = "El apartado descripción no puede ser vacío";
+            }
+            if (string.IsNullOrWhiteSpace(Pelicula.Director))
+            {
+                Error = "El apartado director no puede estar vacío";
+            }
+            if (string.IsNullOrWhiteSpace(Pelicula.Portada))
+            {
+                Error = "El apartado portada no puede ser vacío";
+            }
+            if (Pelicula.Año <= 0)
+            {
+                Error = "el año no puede ser 0";
+            }
+            if (!Uri.TryCreate(Pelicula.Portada, UriKind.Absolute, out var uri))
+            {
+                Error = "Escriba una URL de la imagen valida";
+            }
+            if (string.IsNullOrWhiteSpace(Error))
+            {
+                Cartelera[indiceoriginal] = Pelicula;
+                Serializar();
+                Application.Current.MainPage.Navigation.PopToRootAsync();
+
+            }
+            Actualizar();
         }
         
        
@@ -91,6 +121,7 @@ namespace Cine2MVVM.ViewModels
             if(vista == "Agregar")
             {
                 Pelicula = new Pelicula();
+                Error = "";
                 agregarView = new AgregarView() { BindingContext = this };
                 Application.Current.MainPage.Navigation.PushAsync(agregarView);
             }
@@ -104,11 +135,27 @@ namespace Cine2MVVM.ViewModels
                 Error = "";
                 if (string.IsNullOrWhiteSpace(Pelicula.Titulo))
                 {
-                    Error = "El titulo no puede ser vacio";
+                    Error = "El titulo no puede estar vacío";
                 }
                 if (string.IsNullOrWhiteSpace(Pelicula.Descripcion))
                 {
-                    Error = "la descripcion no puede ser vacio";
+                    Error = "El apartado descripción no puede ser vacío";
+                }
+                if (string.IsNullOrWhiteSpace(Pelicula.Director))
+                {
+                    Error = "El apartado director no puede estar vacío";
+                }
+                if (string.IsNullOrWhiteSpace(Pelicula.Portada))
+                {
+                    Error = "El apartado portada no puede ser vacío";
+                }
+                if(Pelicula.Año <= 0)
+                {
+                    Error = "el año no puede ser 0";
+                }
+                if (!Uri.TryCreate(Pelicula.Portada, UriKind.Absolute, out var uri))
+                {
+                    Error = "Escriba una URL de la imagen valida";
                 }
                 if (string.IsNullOrWhiteSpace(Error))
                 {

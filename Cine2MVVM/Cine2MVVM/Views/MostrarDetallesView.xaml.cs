@@ -26,5 +26,10 @@ namespace Cine2MVVM.Views
         {
             await MenuEliminar.TranslateTo(0, 150, 250, Easing.SinIn);
         }
+
+        private void regresar_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PopToRootAsync();
+        }
     }
 }

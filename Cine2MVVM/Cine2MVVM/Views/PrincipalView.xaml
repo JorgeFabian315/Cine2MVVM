@@ -12,6 +12,7 @@
         <viewmodels:CineVM x:Name="cinevm"></viewmodels:CineVM>
     </ContentPage.BindingContext>
     <Grid RowDefinitions="70,70,*">
+        <!--#REGION COLOR DE FONDO DEL GRID-->
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0.1">
                 <GradientStop Color="#084264"
@@ -22,6 +23,7 @@
                               Offset="1"></GradientStop>
             </LinearGradientBrush>
         </Grid.Background>
+        <!--#ENDREGION COLOR DE FONDO DEL GRID-->
         <Grid ColumnDefinitions=".18*,.5*,.3*"
               Margin="0,20,0,0">
             <Image Source="menu.png"
@@ -70,7 +72,7 @@
                        Margin="0,0,15,0"></Image>
             </StackLayout>
         </Grid>
-        <!--AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIII-->
+        <!--COLLECTIONVIEW-->
         <CollectionView Grid.Row="2"
                         ItemsSource="{Binding Cartelera}"
                         Margin="20,0">
@@ -109,30 +111,34 @@
                         <Frame Padding="0"
                                HasShadow="False"
                                CornerRadius="10"
-                               Margin="15,10,10,10">
+                               Margin="5,7">
                             <Image Source="{Binding Portada}"
                                    WidthRequest="100"
                                    Aspect="AspectFill"></Image>
                         </Frame>
                         <StackLayout Grid.Column="1"
-                                     Margin="0,60,0,0">
+                                     Spacing="3"
+                                     Margin="5,60,0,0">
                             <Label Text="{Binding Titulo}"
-                                   FontSize="Large"
+                                   FontSize="Medium"
+                                   FontAttributes="Bold"
                                    TextColor="White" />
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Director: "
+                                <Label Text="Director:"
                                        FontSize="Small"
                                        TextColor="White" />
                                 <Label Text="{Binding Director}"
                                        FontSize="Small"
                                        TextColor="White" />
                             </StackLayout>
-                            <StackLayout Orientation="Horizontal">
+                            <StackLayout Orientation="Horizontal"
+                                         Margin="0,0,0,10"
+                                         Spacing="-1">
                                 <Image Source="estrella.png"
-                                       WidthRequest="20"
+                                       WidthRequest="15"
                                        VerticalOptions="Center"></Image>
                                 <Label Text="{Binding Puntuacion}"
-                                       FontSize="Large"
+                                       FontSize="Small"
                                        Margin="5,0,0,0"
                                        VerticalOptions="Center"
                                        TextColor="#FFC107"></Label>
@@ -169,7 +175,7 @@
                Source="agregar.png"
                WidthRequest="60"
                VerticalOptions="End"
-               Margin="0,0,30,30"
+               Margin="0,0,10,70"
                HorizontalOptions="End">
             <Image.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding CambiarVistaCommand}"

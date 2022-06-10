@@ -84,9 +84,6 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\eliminar.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Cine2MVVM\Cine2MVVM.csproj">
       <Project>{4E0C0879-6EC5-447F-B932-74E655CF5E94}</Project>
       <Name>Cine2MVVM</Name>
@@ -96,22 +93,25 @@
     <AndroidResource Include="Resources\drawable\estrella.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\agregar2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\microfono.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\lupa.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\agregar.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\menu.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\lapiz.png" />
+    <AndroidResource Include="Resources\drawable\mas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\regreso.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\agregar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\eliminar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
