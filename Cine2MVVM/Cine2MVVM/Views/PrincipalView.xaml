@@ -5,13 +5,13 @@
              xmlns:cardview="clr-namespace:PanCardView;assembly=PanCardView"
              xmlns:sharpnado="clr-namespace:Sharpnado.MaterialFrame;assembly=Sharpnado.MaterialFrame"
              xmlns:viewmodels="clr-namespace:Cine2MVVM.ViewModels"
-             BackgroundColor="#141A32"
              NavigationPage.HasNavigationBar="False"
              Title="Peliculas">
     <ContentPage.BindingContext>
         <viewmodels:CineVM x:Name="cinevm"></viewmodels:CineVM>
     </ContentPage.BindingContext>
     <Grid RowDefinitions="70,70,*">
+        
         <!--#REGION COLOR DE FONDO DEL GRID-->
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0.1">
@@ -22,8 +22,12 @@
                 <GradientStop Color="#141A32"
                               Offset="1"></GradientStop>
             </LinearGradientBrush>
-        </Grid.Background>
-        <!--#ENDREGION COLOR DE FONDO DEL GRID-->
+            </Grid.Background>
+            <!--#ENDREGION COLOR DE FONDO DEL GRID-->
+        <!--<BoxView CornerRadius="0,0,0,80" Grid.RowSpan="3" 
+                 Margin="0,0,20,400"
+                 TranslationX="100"></BoxView>-->
+        
         <Grid ColumnDefinitions=".18*,.5*,.3*"
               Margin="0,20,0,0">
             <Image Source="menu.png"

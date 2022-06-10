@@ -56,9 +56,8 @@
                                 Value="GhostWhite" />
                     </Style>
                 </StackLayout.Resources>
-                <Label Text="Agregar pelicula"
+                    <Label Text="Agregar película"
                        FontSize="Medium"
-                       TextTransform="Uppercase"
                        HorizontalOptions="CenterAndExpand"
                        Margin="0,0,0,0"></Label>
                     <Entry Text="{Binding Pelicula.Titulo}"
